@@ -94,9 +94,6 @@ python main.py --config ./exps/adapter_cifar224.json
 for cub200:
 python main.py --config ./exps/adapter_cub.json
 
-for ssf and vpt:
-python main.py --config ./exps/adam_ssf.json
-python main.py --config ./exps/adam_vpt.json
 ```
 
 
