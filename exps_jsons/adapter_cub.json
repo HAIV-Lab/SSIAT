@@ -1,0 +1,27 @@
+{
+    "prefix": " ",
+    "dataset": "cub",
+    "shuffle": false,
+    "ssca": true,
+    "ca": true,
+    "init_cls": 20,
+    "increment": 20,
+    "model_name": "adam_adapter",
+    "convnet_type": "pretrained_vit_b16_224_adapter",
+    "device": ["0"],
+    "seed": [1993, 1996, 1997],
+    
+    "tuned_epoch":20,
+    "init_lr":0.01,
+    "batch_size":48,
+    "weight_decay":0.0005,
+    "min_lr":0,
+    "ffn_num":64,
+    "optimizer":"sgd",
+    "vpt_type":"shallow",
+    "prompt_token_num":5,
+
+    "scale":20.0,
+    "margin":0.0
+}
+
