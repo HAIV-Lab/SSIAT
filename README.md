@@ -59,13 +59,6 @@ Note: Results may vary slightly depending on the type and number of graphics car
 <img src="results/main table.JPG" width="96%">
 </div>
 
-Hyperparameters for different datasets: 
-|  Datasets   | Scale Value  | Margin Value |
-|  ----  | ----  | ----  |
-| ImageNetR  | 20 | 0.0 |
-| ImageNetA  | 20 | 0.3 |
-| CUB200  | 20 | 0.3 |
-| CIFAR100  | 20 | 0.3 |
 
 ## Requirements
 ### Environment
@@ -82,7 +75,7 @@ We provide the processed datasets as follows:
 
 These subsets are sampled from the original datasets. Please note that we  do not have the right to distribute these datasets. If the distribution violates the license, I shall provide the filenames instead.
 
-You need to modify the path of the datasets in `./utils/data.py`  according to your own path.
+You need to modify the path of the datasets in `./data/data.py`  according to your own path.
 
 ## Training Scripts
 Please follow the settings in the `exps` folder to prepare your json files, and then run:
@@ -106,5 +99,7 @@ python main.py --config ./exps/adapter_cub.json
 This repo is based on [RevisitingCIL](https://github.com/zhoudw-zdw/RevisitingCIL) and [PyCIL](https://github.com/G-U-N/PyCIL).
 
 The implemenations of parameter-efficient tuning methods are based on [VPT](https://github.com/sagizty/VPT), [AdaptFormer](https://github.com/ShoufaChen/AdaptFormer), and [SSF](https://github.com/dongzelian/SSF).
+
+Thanks for their wonderful work!!!
 
 ## Correspondence
