@@ -92,15 +92,15 @@ python main.py --config ./exps/adapter_cub.json
 
 ## Citation
 If you find this useful in your research, please consider citing:
+'''
+	@article{tan2024semantically,
+  		title={Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer},
+  		author={Tan, Yuwen and Zhou, Qinhao and Xiang, Xiang and Wang, Ke and Wu, Yuchuan and Li, Yongbin},
+  		journal={arXiv preprint arXiv:2403.19979},
+  		year={2024}
+		}
 
-@article{tan2024semantically,
-  	title={Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer},
-  	author={Tan, Yuwen and Zhou, Qinhao and Xiang, Xiang and Wang, Ke and Wu, Yuchuan and Li, Yongbin},
-  	journal={arXiv preprint arXiv:2403.19979},
-  	year={2024}
-	}
-
-
+'''
 ## Acknowledgment
 This repo is based on [RevisitingCIL](https://github.com/zhoudw-zdw/RevisitingCIL) and [PyCIL](https://github.com/G-U-N/PyCIL).
 
