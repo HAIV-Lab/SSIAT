@@ -45,6 +45,7 @@ We use adapter without parameter limitation as our baseline, compared with other
 
 <p></p>
 
+## Results
 <div>
 The following table shows the results of the main experiment.
 Note: Results may vary slightly depending on the type and number of graphics cards used, but the overall trend remains consistent.
@@ -100,7 +101,6 @@ If you find this useful in your research, please consider citing:
  year={2024}
 }
 
-}
 ```
 
 ## Acknowledgment
