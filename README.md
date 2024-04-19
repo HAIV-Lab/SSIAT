@@ -19,6 +19,12 @@
 
 The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer](https://arxiv.org/abs/2403.19979)" in PyTorch.  If you use any content of this repo for your work, please cite the following bib entry: 
 
+	@article{tan2024semantically,
+  	title={Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer},
+  	author={Tan, Yuwen and Zhou, Qinhao and Xiang, Xiang and Wang, Ke and Wu, Yuchuan and Li, Yongbin},
+  	journal={arXiv preprint arXiv:2403.19979},
+  	year={2024}
+	}
 
     
 
