@@ -16,7 +16,6 @@ from utils.loss import AngularPenaltySMLoss
 import math
 # tune the model at first session with adapter, and then conduct simplecil.
 num_workers = 8
-ca_epochs = 5
 
 class Learner(BaseLearner):
     def __init__(self, args):
@@ -71,14 +70,12 @@ class Learner(BaseLearner):
         print("The number of training dataset:", len(self.train_dataset))
 
         self.data_manager = data_manager
-        self.train_loader = DataLoader(train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=num_workers)
+        self.train_loader = DataLoader(train_dataset, batch_size=self.batch_size, shuffle=True, num_workers=n8)
         test_dataset = data_manager.get_dataset(np.arange(0, self._total_classes), source="test", mode="test")
-        self.test_loader = DataLoader(test_dataset, batch_size=self.batch_size, shuffle=False, num_workers=num_workers)
+        self.test_loader = DataLoader(test_dataset, batch_size=self.batch_size, shuffle=False, num_workers=8)
         train_dataset_for_protonet = data_manager.get_dataset(np.arange(0, self._total_classes), source="train",
                                                               mode="test")
 
-        self.train_loader_for_protonet = DataLoader(train_dataset_for_protonet, batch_size=self.batch_size,
-                                                    shuffle=True, num_workers=num_workers)
 
         if len(self._multiple_gpus) > 1:
             print('Multiple GPUs')

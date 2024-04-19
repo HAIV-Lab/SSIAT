@@ -100,7 +100,7 @@ class BaseLearner(object):
                 inp = inputs[_iter * num_sampled_pcls:(_iter + 1) * num_sampled_pcls]
                 tgt = targets[_iter * num_sampled_pcls:(_iter + 1) * num_sampled_pcls]
 
-                # 20230905 SLCA stage two only use classifiers
+                # -stage two only use classifiers
                 outputs = self._network.ca_forward(inp)
                 logits = self.args['scale'] * outputs['logits']
 
@@ -240,48 +240,8 @@ class BaseLearner(object):
             # self._class_covs = np.zeros((self._total_classes, self.feature_dim, self.feature_dim))
             self._class_covs = torch.zeros((self._total_classes, self.feature_dim, self.feature_dim))
 
-            # self._class_covs = []
-        # if check_diff:
-        #     for class_idx in range(0, self._known_classes):
-        #         data, targets, idx_dataset = data_manager.get_dataset(np.arange(class_idx, class_idx + 1),
-        #                                                               source='train',
-        #                                                               mode='test', ret_data=True)
-        #         idx_loader = DataLoader(idx_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
-        #         # vectors, _ = self._extract_vectors_aug(idx_loader)
-        #         vectors, _ = self._extract_vectors(idx_loader)
-        #         class_mean = np.mean(vectors, axis=0)
-        #         # class_cov = np.cov(vectors.T)
-        #         class_cov = torch.cov(torch.tensor(vectors, dtype=torch.float64).T)
-        #         if check_diff:
-        #             log_info = "cls {} sim: {}".format(class_idx, torch.cosine_similarity(
-        #                 torch.tensor(self._class_means[class_idx, :]).unsqueeze(0),
-        #                 torch.tensor(class_mean).unsqueeze(0)).item())
-        #             logging.info(log_info)
-        #             np.save('task_{}_cls_{}_mean.npy'.format(self._cur_task, class_idx), class_mean)
-        #             # print(class_idx, torch.cosine_similarity(torch.tensor(self._class_means[class_idx, :]).unsqueeze(0), torch.tensor(class_mean).unsqueeze(0)))
-        #
-        # if oracle:
-        #     for class_idx in range(0, self._known_classes):
-        #         data, targets, idx_dataset = data_manager.get_dataset(np.arange(class_idx, class_idx + 1),
-        #                                                               source='train',
-        #                                                               mode='test', ret_data=True)
-        #         idx_loader = DataLoader(idx_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
-        #         vectors, _ = self._extract_vectors(idx_loader)
-        #
-        #         # vectors = np.concatenate([vectors_aug, vectors])
-        #
-        #         class_mean = np.mean(vectors, axis=0)
-        #         # class_cov = np.cov(vectors.T)
-        #         class_cov = torch.cov(torch.tensor(vectors, dtype=torch.float64).T) + torch.eye(
-        #             class_mean.shape[-1]) * 1e-5
-        #         self._class_means[class_idx, :] = class_mean
-        #         self._class_covs[class_idx, ...] = class_cov
         radius = []
         for class_idx in range(self._known_classes, self._total_classes):
-            # data, targets, idx_dataset = data_manager.get_dataset(np.arange(class_idx, class_idx+1), source='train',
-            #                                                       mode='train', ret_data=True)
-            # idx_loader = DataLoader(idx_dataset, batch_size=batch_size, shuffle=False, num_workers=4)
-            # vectors_aug, _ = self._extract_vectors_aug(idx_loader)
 
             data, targets, idx_dataset = data_manager.get_dataset(np.arange(class_idx, class_idx + 1), source='train',
                                                                   mode='test', ret_data=True)
@@ -318,11 +278,9 @@ class BaseLearner(object):
             if cov is None:
                 cov = np.sum(np.tile(W_norm[:, :, None, None], [
                     1, 1, DY.shape[1], DY.shape[2]]) * np.tile(DY[None, :, :, :], [W.shape[0], 1, 1, 1]), axis=1)
-                # cov = np.sum(W_norm[:, :, None, None] *  DY[None, :, :, :], axis=1)
             else:
                 displacement = np.sum(np.tile(W_norm[:, :, None, None], [
                     1, 1, DY.shape[1], DY.shape[2]]) * np.tile(DY[None, :, :, :], [W.shape[0], 1, 1, 1]), axis=1)
-                # displacement = np.sum(W_norm[:, :, None, None] *  DY[None, :, :, :], axis=1)
                 cov = np.concatenate((cov, displacement))
             loop_end_time = time.time()
             print("single loop time: ", loop_end_time - loop_start_time)
