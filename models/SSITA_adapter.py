@@ -140,8 +140,6 @@ class Learner(BaseLearner):
         else:
             self.tuned_epochs = self.args['inc_epochs']
             # show total parameters and trainable parameters
-
-
             param_groups = []
 
             param_groups.append(
@@ -256,7 +254,7 @@ class Learner(BaseLearner):
         for key in update_magnitudes.keys():
                 grad_shapes[key] = update_magnitudes[key].shape
                 grad_shapes_int[key] = np.cumprod(list(update_magnitudes[key].shape))[-1]
-        # 20230907 sort different block
+        # sort different block
         large_tensor = torch.cat([update_magnitudes[key].flatten() for key in grad_shapes.keys()])
         _, indexes = large_tensor.topk(math.ceil(0.0001* large_tensor.shape[0]))
         print(indexes)
