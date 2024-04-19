@@ -17,11 +17,10 @@
 </div>
 </div>
 
-The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer](https://github.com/HAIV-Lab/SSIAT/)" in PyTorch.  If you use any content of this repo for your work, please cite the following bib entry: 
+The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer](https://arxiv.org/abs/2403.19979)" in PyTorch.  If you use any content of this repo for your work, please cite the following bib entry: 
+
 
     
-
-
 
 
 
