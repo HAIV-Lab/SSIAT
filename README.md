@@ -51,7 +51,7 @@ Note: Results may vary slightly depending on the type and number of graphics car
 </div>
 
 <div align="center">
-<img src="results/main table.png" width="96%">
+<img src="results/main table.JPG" width="96%">
 </div>
 
 Hyperparameters for different datasets: 
