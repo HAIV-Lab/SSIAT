@@ -26,7 +26,7 @@ The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A C
 
 [04/2023] 🌟 [arXiv](https://arxiv.org/abs/2403.19979) paper has been released.
 
-[04/2024] 🌟 Code has been released.
+[04/2024] 🌟 The code repository  has been released.
 
 
 ## Abstract
