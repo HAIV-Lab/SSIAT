@@ -17,23 +17,15 @@
 </div>
 </div>
 
-The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer](https://arxiv.org/abs/2403.19979)" in PyTorch.  If you use any content of this repo for your work, please cite the following bib entry: 
-
-	@article{tan2024semantically,
-  	title={Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer},
-  	author={Tan, Yuwen and Zhou, Qinhao and Xiang, Xiang and Wang, Ke and Wu, Yuchuan and Li, Yongbin},
-  	journal={arXiv preprint arXiv:2403.19979},
-  	year={2024}
-	}
-
+The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer](https://arxiv.org/abs/2403.19979)" in PyTorch. 
     
 
-
-
-## Updates
+## News
 
 [02/2023]🎉  Our paper has been accepted by CVPR2024.
+
 [04/2023] 🌟 [arXiv](https://arxiv.org/abs/2403.19979) paper has been released.
+
 [04/2024] 🌟 Code has been released.
 
 
@@ -41,7 +33,7 @@ The code repository for "[Semantically-Shifted Incremental Adapter-Tuning is A C
 Class-incremental learning (CIL) aims to enable models to continuously learn new classes while overcoming catastrophic forgetting. The introduction of pre-trained models has brought new tuning paradigms to CIL. In this paper, we revisit different parameter-efficient tuning (PET) methods within the context of continual learning. We observe that adapter tuning demonstrates superiority over prompt-based methods, even without parameter expansion in each learning session. Motivated by this, we propose incrementally tuning the shared adapter without imposing parameter update constraints, enhancing the learning capacity of the backbone. Additionally, we employ feature sampling from stored prototypes to retrain a unified classifier, further improving its performance.  We estimate the semantic shift of old prototypes without access to past samples and update stored prototypes session by session. Our proposed method eliminates model expansion and avoids retaining any image samples. It surpasses previous pre-trained model-based CIL methods and demonstrates remarkable continual learning capabilities. Experimental results on five CIL benchmarks validate the effectiveness of our approach, achieving state-of-the-art (SOTA) performance. 
 <p></p>
 
-
+## Pipeline
 <div align="center">
 <img src="results/overall_process.png" width="93%">
 </div>
@@ -98,7 +90,18 @@ python main.py --config ./exps/adapter_cub.json
 ```
 
 
-## Acknolegment
+## Citation
+If you find this useful in your research, please consider citing:
+
+@article{tan2024semantically,
+  	title={Semantically-Shifted Incremental Adapter-Tuning is A Continual ViTransformer},
+  	author={Tan, Yuwen and Zhou, Qinhao and Xiang, Xiang and Wang, Ke and Wu, Yuchuan and Li, Yongbin},
+  	journal={arXiv preprint arXiv:2403.19979},
+  	year={2024}
+	}
+
+
+## Acknowledgment
 This repo is based on [RevisitingCIL](https://github.com/zhoudw-zdw/RevisitingCIL) and [PyCIL](https://github.com/G-U-N/PyCIL).
 
 The implemenations of parameter-efficient tuning methods are based on [VPT](https://github.com/sagizty/VPT), [AdaptFormer](https://github.com/ShoufaChen/AdaptFormer), and [SSF](https://github.com/dongzelian/SSF).
@@ -106,3 +109,4 @@ The implemenations of parameter-efficient tuning methods are based on [VPT](http
 Thanks for their wonderful work!!!
 
 ## Correspondence
+If you have any question about this project, please contact xex@hust.edu.cn
