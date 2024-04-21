@@ -56,7 +56,7 @@ The following table shows the main results of our proposed method and other SOTA
 
 
 ## Requirements
-### Environment
+### Dependencies
 1. [torch 1.11.0](https://github.com/pytorch/pytorch)
 2. [torchvision 0.12.0](https://github.com/pytorch/vision)
 3. [timm 0.6.12](https://github.com/huggingface/pytorch-image-models)
