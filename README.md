@@ -47,7 +47,7 @@ We use adapter without parameter limitation as our baseline, compared with other
 
 ## Results
 <div>
-The following table shows the main results of our proposed method and other SOTA methods. Please note that there might be slight variations in results based on the type and quantity of graphics cards utilized.
+The following table shows the main results of our proposed method and other SOTA methods. Please note that there might be slight variations in results based on the type and quantity of NVIDIA GPUs.
 </div>
 
 <div align="center">
