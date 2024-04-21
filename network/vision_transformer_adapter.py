@@ -19,6 +19,56 @@ from collections import OrderedDict
 import torch
 
 
+
+'''
+Attention Module
+'''
+class Attention(nn.Module):
+    def __init__(self, dim, num_heads=8, qkv_bias=False, attn_drop=0., proj_drop=0., ):
+        super().__init__()
+        self.num_heads = num_heads
+        head_dim = dim // num_heads
+        self.head_dim = dim // num_heads
+        self.scale = head_dim ** -0.5
+
+        self.q_proj = nn.Linear(dim, dim, bias=qkv_bias)
+        self.v_proj = nn.Linear(dim, dim, bias=qkv_bias)
+        self.k_proj = nn.Linear(dim, dim, bias=qkv_bias)
+
+        self.attn_drop = nn.Dropout(attn_drop)
+        self.proj = nn.Linear(dim, dim)
+        self.proj_drop = nn.Dropout(proj_drop)
+
+    def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
+        return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
+
+    def forward(self, x):
+        B, N, C = x.shape
+
+        q = self.q_proj(x)
+        k = self._shape(self.k_proj(x), -1, B).view(B * self.num_heads, -1, self.head_dim)
+        v = self._shape(self.v_proj(x), -1, B).view(B * self.num_heads, -1, self.head_dim)
+        q = self._shape(q, N, B).view(B * self.num_heads, -1, self.head_dim)
+
+        attn_weights = torch.bmm(q, k.transpose(1, 2)) * self.scale
+
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1)
+        attn_probs = self.attn_drop(attn_weights)
+        attn_output = torch.bmm(attn_probs, v)
+
+        attn_output = attn_output.view(B, self.num_heads, N, self.head_dim)
+        attn_output = attn_output.transpose(1, 2)
+        attn_output = attn_output.reshape(B, N, C)
+
+        x = self.proj(attn_output)
+        x = self.proj_drop(x)
+
+        return x
+
+'''
+Adapter Module
+'''
+
 class Adapter(nn.Module):
     def __init__(self, config=None, d_model=None, bottleneck=None, dropout=0.0, init_option="bert",
                  adapter_scalar="1.0", adapter_layernorm_option="in"):
@@ -76,49 +126,6 @@ class Adapter(nn.Module):
             output = up
 
         return output
-
-
-class Attention(nn.Module):
-    def __init__(self, dim, num_heads=8, qkv_bias=False, attn_drop=0., proj_drop=0., ):
-        super().__init__()
-        self.num_heads = num_heads
-        head_dim = dim // num_heads
-        self.head_dim = dim // num_heads
-        self.scale = head_dim ** -0.5
-
-        self.q_proj = nn.Linear(dim, dim, bias=qkv_bias)
-        self.v_proj = nn.Linear(dim, dim, bias=qkv_bias)
-        self.k_proj = nn.Linear(dim, dim, bias=qkv_bias)
-
-        self.attn_drop = nn.Dropout(attn_drop)
-        self.proj = nn.Linear(dim, dim)
-        self.proj_drop = nn.Dropout(proj_drop)
-
-    def _shape(self, tensor: torch.Tensor, seq_len: int, bsz: int):
-        return tensor.view(bsz, seq_len, self.num_heads, self.head_dim).transpose(1, 2).contiguous()
-
-    def forward(self, x):
-        B, N, C = x.shape
-
-        q = self.q_proj(x)
-        k = self._shape(self.k_proj(x), -1, B).view(B * self.num_heads, -1, self.head_dim)
-        v = self._shape(self.v_proj(x), -1, B).view(B * self.num_heads, -1, self.head_dim)
-        q = self._shape(q, N, B).view(B * self.num_heads, -1, self.head_dim)
-
-        attn_weights = torch.bmm(q, k.transpose(1, 2)) * self.scale
-
-        attn_weights = nn.functional.softmax(attn_weights, dim=-1)
-        attn_probs = self.attn_drop(attn_weights)
-        attn_output = torch.bmm(attn_probs, v)
-
-        attn_output = attn_output.view(B, self.num_heads, N, self.head_dim)
-        attn_output = attn_output.transpose(1, 2)
-        attn_output = attn_output.reshape(B, N, C)
-
-        x = self.proj(attn_output)
-        x = self.proj_drop(x)
-
-        return x
 
 
 class Block(nn.Module):
@@ -261,7 +268,7 @@ class VisionTransformer(nn.Module):
         B = x.shape[0]
         x = self.patch_embed(x)
 
-        cls_tokens = self.cls_token.expand(B, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
+        cls_tokens = self.cls_token.expand(B, -1, -1) 
         x = torch.cat((cls_tokens, x), dim=1)
         x = x + self.pos_embed
         x = self.pos_drop(x)
