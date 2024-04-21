@@ -62,7 +62,7 @@ The following table shows the main results of our proposed method and other SOTA
 3. [timm 0.6.12](https://github.com/huggingface/pytorch-image-models)
 
 
-### Dataset
+### Datasets
 We provide the processed datasets as follows:
 - **CIFAR100**: will be automatically downloaded by the code.
 - **CUB200** **ImageNet-R** **ImageNet-A**  **VTAB**: Reference [Revisiting](https://github.com/zhoudw-zdw/RevisitingCIL)
