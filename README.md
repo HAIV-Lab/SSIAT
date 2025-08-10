@@ -11,7 +11,7 @@
     
 </div>
 <div>
-<sup>1</sup>School of Artificial Intelligence and Automation, Huazhong University of Science and Technology&emsp;
+<sup>1</sup>Huazhong University of Science and Technology&emsp;
 
 <sup>2</sup>Alibaba Group&emsp;
 </div>
